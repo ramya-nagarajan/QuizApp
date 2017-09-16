@@ -83,7 +83,6 @@ public class QuizActivity extends AppCompatActivity {
                             mScore = mScore + 2;
                             updateScore(mScore,t);
                             updateQuestion(t);
-                            //This line of code is optiona
                             Toast.makeText(QuizActivity.this, "correct", Toast.LENGTH_SHORT).show();
 
                         } else {
@@ -98,9 +97,7 @@ public class QuizActivity extends AppCompatActivity {
                     }
                 });
 
-                //End of Button Listener for Button1
 
-                //Start of Button Listener for Button2
                 mButtonChoice2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -110,8 +107,8 @@ public class QuizActivity extends AppCompatActivity {
                             mScore = mScore + 2;
                             updateScore(mScore,t);
                             updateQuestion(t);
-                            //This line of code is optiona
-                            Toast.makeText(QuizActivity.this, "correct", Toast.LENGTH_SHORT).show();
+
+                            Toast.makeText(QuizActivity.this, "correct" , Toast.LENGTH_SHORT).show();
 
                         } else {
                             mScore = mScore - 1;
@@ -124,10 +121,7 @@ public class QuizActivity extends AppCompatActivity {
                     }
                 });
 
-                //End of Button Listener for Button2
 
-
-                //Start of Button Listener for Button3
                 mButtonChoice3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -151,9 +145,7 @@ public class QuizActivity extends AppCompatActivity {
                     }
                 });
 
-                //End of Button Listener for Button3
 
-                //Start of Button Listener for Button4
                 mButtonChoice4.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -176,8 +168,6 @@ public class QuizActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-                //End of Button Listener for Button4
 
     }
 
@@ -238,21 +228,21 @@ public class QuizActivity extends AppCompatActivity {
     private void updateScore(int point,int topic_num) {
 
         if (topic_num == 1) {
-            math_score += point;
+            math_score = point;
             mScoreView.setText("" + math_score);
         }
         else if (topic_num == 2) {
-            gk_score += point;
+            gk_score = point;
             mScoreView.setText("" + gk_score);
         }
         else{
-            sc_score += point;
+            sc_score = point;
             mScoreView.setText("" + sc_score);
         }
+        score = math_score+gk_score+sc_score;
+        if((mflag && gkflag && scflag) == true){
 
-        if(mflag && gkflag && scflag ==true){
-            score = math_score+gk_score+sc_score;
-            Toast.makeText(QuizActivity.this, "Final score: "+ String.valueOf(score), Toast.LENGTH_SHORT).show();
+            Toast.makeText(QuizActivity.this, "Done with all topics", Toast.LENGTH_SHORT).show();
         }
     }
 }

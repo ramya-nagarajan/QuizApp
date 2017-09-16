@@ -27,8 +27,8 @@ public class QuizActivity extends AppCompatActivity {
     private int mQuestionNumber = 0;
     private int t=0;
     private int score=0;
-    private int final_score[]={0};
-
+    private int math_score=0,gk_score=0,sc_score =0;
+    private boolean mflag =false,gkflag=false,scflag=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -194,6 +194,7 @@ public class QuizActivity extends AppCompatActivity {
             mAnswer = mQuestionLibrary.getCorrectAnswer(mQuestionNumber,topic_num);
             if(mQuestionNumber == 4) {
                 mQuestionNumber = 0;
+                mflag =true;
                 Toast.makeText(QuizActivity.this, "Done with Mathematics quiz", Toast.LENGTH_SHORT).show();
 
             }
@@ -209,6 +210,7 @@ public class QuizActivity extends AppCompatActivity {
             mAnswer = mQuestionLibrary.getCorrectAnswer(mQuestionNumber,topic_num);
             if(mQuestionNumber == 4) {
                 mQuestionNumber = 0;
+                gkflag =true;
                 Toast.makeText(QuizActivity.this, "Done with General Knowledge quiz", Toast.LENGTH_SHORT).show();
             }
             else
@@ -224,6 +226,7 @@ public class QuizActivity extends AppCompatActivity {
             mAnswer = mQuestionLibrary.getCorrectAnswer(mQuestionNumber,topic_num);
             if(mQuestionNumber == 4) {
                 mQuestionNumber = 0;
+                scflag=true;
                 Toast.makeText(QuizActivity.this, "Done with Science quiz", Toast.LENGTH_SHORT).show();
             }
             else
@@ -235,17 +238,21 @@ public class QuizActivity extends AppCompatActivity {
     private void updateScore(int point,int topic_num) {
 
         if (topic_num == 1) {
-            final_score[0] += point;
-            mScoreView.setText("" + final_score[0]);
+            math_score += point;
+            mScoreView.setText("" + math_score);
         }
         else if (topic_num == 2) {
-            final_score[1] += point;
-            mScoreView.setText("" + final_score[1]);
+            gk_score += point;
+            mScoreView.setText("" + gk_score);
         }
         else{
-            final_score[2] += point;
-            mScoreView.setText("" + final_score[2]);
+            sc_score += point;
+            mScoreView.setText("" + sc_score);
         }
-        score = final_score[0]+final_score[1]+final_score[2];
+
+        if(mflag && gkflag && scflag ==true){
+            score = math_score+gk_score+sc_score;
+            Toast.makeText(QuizActivity.this, "Final score: "+ String.valueOf(score), Toast.LENGTH_SHORT).show();
+        }
     }
 }
